@@ -30,6 +30,6 @@ sudo pacman -U oopz*
 Debian/Ubuntu:
 
 ```bash
-wget https://github.com/miaoermua/oopz-electron/releases/download/v1.2.9/oopz-electron-1.2.9.deb
+wget https://github.com/miaoermua/oopz-electron/releases/download/v1.2.9/oopz-electron-1.2.9_amd64.deb
 sudo apt install oopz*
 ```
