@@ -7,10 +7,33 @@
     "name": "miaoermua ",
     "email": "miaoermua@gmail.com"
   },
-  "homepage": "https://web.oopz.cn/  ",
+  "homepage": "https://web.oopz.cn/",
   "scripts": {
     "start": "electron .",
-    "build": "node build.js"
+    "build": "electron-builder"
+  },
+  "build": {
+    "appId": "cn.oopz.app",
+    "productName": "oopz-electron",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "**/*"
+    ],
+    "linux": {
+      "target": ["AppImage", "deb","pacman"],
+      "icon": "icon.png",
+      "category": "Network"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "icon.ico"
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "icon.icns"
+    }
   },
   "devDependencies": {
     "electron": "^37.3.1",
