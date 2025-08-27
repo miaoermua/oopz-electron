@@ -12,7 +12,7 @@ provides=($pkgname)
 options=(!emptydirs)
 
 source=(
-    "git+https://github.com/miaoermua/oopz-electron.git#tag=v$pkgver"
+    "oopz-electron-v$pkgver.tar.gz" 
 )
 sha256sums=('SKIP')
 
