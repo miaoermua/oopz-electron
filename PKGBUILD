@@ -36,7 +36,7 @@ package() {
 #!/bin/sh
 APP_DIR="/usr/lib/oopz-electron"
 cd "$APP_DIR"
-echo "正在启动 Oopz... 首次加载可能需要 10-20 秒"
+echo "[Tip] 首次加载资源可能需要 10s 左右"
 exec electron main.js "$@"
 EOF
     chmod +x "$pkgdir$_bindir/oopz-electron"
