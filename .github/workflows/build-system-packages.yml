@@ -1,0 +1,99 @@
+name: Build System Packages
+
+on:
+  push:
+    tags:
+      - 'v*'
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build-arch:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Arch Linux
+      uses: maxim-lobanov/setup-chroot@v1
+      with:
+        distro: archlinux
+        arch: x86_64
+        packages: base-devel git
+    
+    - name: Build Arch Package
+      run: |
+        chroot /chroots/archlinux-x86_64 bash -c "
+          cd /github/workspace
+          makepkg -s --noconfirm
+        "
+    
+    - name: Upload Arch Package
+      uses: actions/upload-artifact@v4
+      with:
+        name: arch-package
+        path: "*.pkg.tar.zst"
+
+  build-debian:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Debian Build Environment
+      run: |
+        sudo apt update
+        sudo apt install -y build-essential devscripts debhelper
+    
+    - name: Build Debian Package
+      run: |
+        dpkg-buildpackage -uc -us
+    
+    - name: Upload Debian Package
+      uses: actions/upload-artifact@v4
+      with:
+        name: debian-package
+        path: "../*.deb"
+
+  build-fedora:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Fedora Build Environment
+      uses: maxim-lobanov/setup-chroot@v1
+      with:
+        distro: fedora
+        arch: x86_64
+        packages: rpm-build rpmdevtools git
+    
+    - name: Build Fedora Package
+      run: |
+        chroot /chroots/fedora-x86_64 bash -c "
+          cd /github/workspace
+          rpmbuild -ba oopz-electron.spec
+        "
+    
+    - name: Upload Fedora Package
+      uses: actions/upload-artifact@v4
+      with:
+        name: fedora-package
+        path: "*.rpm"
+
+  release:
+    needs: [build-arch, build-debian, build-fedora]
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/')
+    steps:
+    - name: Download All Artifacts
+      uses: actions/download-artifact@v4
+    
+    - name: Create Release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: |
+          arch-package/*.pkg.tar.zst
+          debian-package/*.deb
+          fedora-package/*.rpm
+        generate_release_notes: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

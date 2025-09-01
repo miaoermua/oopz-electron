@@ -14,7 +14,10 @@ build({
       "icon.png"
     ],
     linux: {
-      target: 'tar.gz',
+      target: [
+        'AppImage',
+        'tar.gz'
+      ],
       icon: "icon.png",
       category: "Network"
     }
