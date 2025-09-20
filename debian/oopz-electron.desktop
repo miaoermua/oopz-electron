@@ -1,9 +1,0 @@
-[Desktop Entry]
-Name=Oopz
-Comment=Oopz Electron App
-Exec=oopz-electron
-Icon=oopz-electron
-Terminal=false
-Type=Application
-Categories=Network;Chat;
-StartupWMClass=oopz-electron

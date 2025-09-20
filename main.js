@@ -16,7 +16,7 @@ function createWindow() {
   })
 
   win.setMenu(null) // 禁用菜单栏
-  win.loadURL('https://web.oopz.cn')
+  win.loadURL('https://web.oopz.cn/)
 }
 
 

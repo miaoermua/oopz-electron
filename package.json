@@ -1,5 +1,5 @@
 {
-  "name": "oopz-electron",
+  "name": "kook-electron",
   "version": "v1.2.9",
   "description": "Oopz Electron App",
   "main": "main.js",
@@ -7,7 +7,7 @@
     "name": "miaoermua ",
     "email": "miaoermua@gmail.com"
   },
-  "homepage": "https://web.oopz.cn/  ",
+  "homepage": "https://web.oopz.cn/",
   "scripts": {
     "start": "electron .",
     "build": "node build.js"
