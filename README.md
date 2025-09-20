@@ -1,6 +1,10 @@
 # oopz-electron
 使用 electron 打包的 Oopz Linux 客户端
 
+缺点：在 Gnome 桌面环境下 dock 栏无法显示正确图标，.desktop 则正常，可能和 electron 版本有关。
+
+无法测试非 archlinux 以外的桌面系统，请自行测试并反馈 issues。
+
 版权声明，本项目只是打包网页版 Oopz，并无做其他修改，服务和版权提供商依旧为: 绍兴未来山海科技有限公司
 
 <img width="1322" height="959" alt="pages" src="https://github.com/user-attachments/assets/2472c155-2641-4d2c-8814-4020cf0c493c" />
